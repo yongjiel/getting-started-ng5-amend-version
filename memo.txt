@@ -1,0 +1,4 @@
+firebase in google cloud config:
+https://console.firebase.google.com/project/forangular5/database/forangular5/data
+click rules. change to read: true, write: true to allow all free access for external applications.
+
