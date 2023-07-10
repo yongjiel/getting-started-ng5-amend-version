@@ -12,6 +12,7 @@ import {exhaustMap, map, mergeMap, catchError} from 'rxjs/operators';
 @Injectable()
 export class CardsEffects {
     @Effect()
+    // this would like to side plugin the list from firebsae based on the action.
     loadCards$ = this.actions$
         .pipe(ofType(Cards.LOAD),
             mergeMap(action => {

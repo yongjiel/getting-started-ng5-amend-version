@@ -15,12 +15,16 @@ export class CardService {
 
   //constructor(private http: HttpClient) { }
    constructor(private db: AngularFireDatabase) {
-     this.cardsRef = db.list('/cards');
+     this.cardsRef = db.list('/cards');  // this matches to firebase db cards data strucutre.
    }
 
   getCardsList(): Observable<Card[]> {
     return this.cardsRef.snapshotChanges().map((arr) => {
-      return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }) );
+      return arr.map((snap) => {
+          console.log("'''" + "'''" + snap.key);
+          console.log(snap.payload.val());
+          return Object.assign(snap.payload.val(), 
+                            { $key: "Firebase ID: "+snap.key }) } ); // assign value to Card in /models
     });
   }
 
