@@ -1,3 +1,7 @@
+If get error ERR_OSSL_EVP_UNSUPPORTED,
+export NODE_OPTIONS=--openssl-legacy-provider
+
+
 # GettingStartedNg5
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.

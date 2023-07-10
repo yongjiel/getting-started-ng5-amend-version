@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title: string = 'Angular 2 get start cards project'
+  title: string = 'Angular5 get start cards project'
   constructor() {
   }
   ngOnInit() {

@@ -25,7 +25,7 @@
     "@ngrx/effects": "^7.1.0",
     "@ngrx/store": "^7.1.0",
     "bootstrap": "4.0.0-beta.2",
-    "core-js": "^2.5.4",
+    "core-js": "2.5.x",
     "firebase": "^5.8.0",
     "ngrx-store-logger": "^0.2.2",
     "redux": "^4.0.1",
