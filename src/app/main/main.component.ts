@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
   public cards$: Observable<Card[]>;
 
   addCard(card: Card) {
+    // update the state in store 
     this.store.dispatch(new cards.Add(card));
   }
 
@@ -30,7 +31,12 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this next line do nothing, just return the current state. be careful
+    // it is updated.
     this.store.dispatch(new cards.Load());
+    // reassign the new state's cards into this.cards$ to trigger
+    // <app-card-list [cards]="cards$ | async"></app-card-list>, then
+    // trigger card-list.components.ts. 
     this.cards$ = this.store.select(fromRoot.getCards);
   }
 }

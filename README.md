@@ -1,6 +1,10 @@
 If get error ERR_OSSL_EVP_UNSUPPORTED,
 export NODE_OPTIONS=--openssl-legacy-provider
 
+If get error when npm install,
+npm install --ignore-script
+
+
 
 # GettingStartedNg5
 

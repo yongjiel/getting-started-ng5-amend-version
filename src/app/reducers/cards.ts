@@ -12,11 +12,11 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: cards.Actions): State {
     switch (action.type) {
-      // case cards.ADD:
-      //   return {
-      //       ...state, 
-      //       cards: [...state.cards, action.payload]
-      //   };
+      case cards.ADD:
+        return {
+            ...state, 
+            cards: [...state.cards, action.payload]
+        };
       case cards.REMOVE:
         const index = state.cards.map((card) => card.$key).indexOf(action.payload);
         return {
