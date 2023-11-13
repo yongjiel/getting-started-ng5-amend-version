@@ -21,7 +21,9 @@ import {Routes, RouterModule, Router} from "@angular/router";
 
 const routes: Routes = [
   {path: '', redirectTo: 'about', pathMatch: 'full'},
-  {path: 'cards', loadChildren: './cards.module#CardsModule'},
+  {path: 'cards',
+  loadChildren: () => import('./cards.module').then(x => x.CardsModule) 
+  },
   {path: 'about', component: AboutComponent},
 ]
 

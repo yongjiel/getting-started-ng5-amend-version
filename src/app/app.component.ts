@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title: string = 'Angular5 get start cards project'
   constructor() {
+    console.log("HEREREREERRER");
   }
   ngOnInit() {
   }

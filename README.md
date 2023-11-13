@@ -2,7 +2,8 @@ If get error ERR_OSSL_EVP_UNSUPPORTED,
 export NODE_OPTIONS=--openssl-legacy-provider
 
 If get error when npm install,
-npm install --ignore-script
+npm install --ignore-script   or 
+npm update  --legacy-peer-deps --ignore-script
 
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import {  HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable'; // install rxjs-compact
 import { Card } from '../models/card'; // has to build this file.
