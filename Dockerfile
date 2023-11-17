@@ -1,6 +1,6 @@
 #### STAGE 1: Build ###
 ## We label our stage as 'builder'
-FROM node:8.6-alpine as builder
+FROM node:18.0-alpine as builder
 
 ENV APP_PATH /app
 MAINTAINER Sergey Moiseev <sergey.moiseev@toptal.com>

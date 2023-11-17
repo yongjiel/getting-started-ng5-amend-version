@@ -50,7 +50,7 @@ export class NewCardInputComponent implements OnInit {
   addCard(card) {
     this.onCardAdd.emit(card);
     //this.newCard.text = '';
-    this.newCardForm.controls['text'].setValue('');
+    this.newCardForm.controls['text'].setValue('');  //pure javascript
   }
 
 }

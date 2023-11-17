@@ -2,3 +2,102 @@ firebase in google cloud config:
 https://console.firebase.google.com/project/forangular5/database/forangular5/data
 click rules. change to read: true, write: true to allow all free access for external applications.
 
+===== How to learn it faster ====
+
+1.  basic structure.
+   1. for module. declarations: [] for included components from the top
+   level of this module ones into the nested ones.
+   imports : [] for browserModule from @angular/platform-browser
+                for redux store.
+   providers: [] from services
+   bootstrap: [] from AppComponent that is top level component.
+   then export class as plain javascript
+   sub routes are defined in app.module.ts
+
+   const routes: Routes = [
+    {path: '', redirectTo: 'about', pathMatch: 'full'},
+    {path: 'cards',
+    loadChildren: () => import('./cards.module').then(x => x.CardsModule) 
+    },
+    {path: 'about', component: AboutComponent},
+    ]
+
+   @NgModule({
+        declarations: [
+            AppComponent,
+            CardComponent,
+            CardListComponent,
+        ],
+        imports: [
+            BrowserModule
+        ],
+        providers: [],
+        bootstrap: [AppComponent]
+        })
+    export class AppModule { }
+
+2. main.ts 
+   Most of the code in the main. ts file is generic, and you
+   will rarely have to touch or change this entry point file.
+   Its main aim is to point the Angular framework at the core
+   module of your application and let it trigger the rest of
+   your application source code from that point.
+   It needs to call up the primary module.
+     platformBrowserDynamic().bootstrapModule(AppModule)
+    .catch(err => console.error(err));
+   and set up the environment.
+    if (environment.production) {
+       enableProdMode();
+    }
+
+   By booting up the primary module, the AppModule hooks up 
+   to routes. routes hooks up to CardsModule. cards.module.ts
+   hooks up to MainComponent. MainComponent template builds
+   the card input and cards show. then trigger the app-card-input
+   selector and app-card selector. Be careful of the segeragation
+   of route and component (AppModule and cards.module.ts and
+   MainComponent).
+
+3. components (card-list and card).
+   card-list: watch out the card-list.components.html. 
+    *ngFor="let card of cards" [card]="card"
+    ngFor is directy. [card] is also the directy referenced into
+    the `let card of cards`. "card" referenced to  <app-card> 
+    CardComponent.
+    @Input() cards: Array<any>; 
+    Be careful of where is the `cards` in `let card of cards`.
+    It is from card-list.components.ts
+    @Input() cards: Array<any>;
+
+4.  two-way data binding for new-card-input.
+    <input [value]="newCard.text" (input)="newCard.text = $event.target.value">
+    [value] is get. (input) is POST to get the event value to our
+    component. Angular  syntax sugar
+    <input placeholder="Take a note..." class="form-control" [(ngModel)]="newCard.text">
+    It hooks up the output in component.
+        @Output() onCardAdd = new EventEmitter<string>();
+    It hooks up to HostListener
+        @HostListener('document:keypress', ['$event'])
+        handleKeyboardEvent(event: KeyboardEvent) {
+            if (event.code === "Enter" && this.newCardForm.valid) {
+                //this.addCard(this.newCard.text);
+                // Original is this.addCard(this.newCardForm.controls['text'].value); Just
+                // pass text only to the firebase. Firebase just keeps the text but not 
+                // the Card object. So it is not consistant with the action's payload which
+                // is the card object but not just card's text.
+                this.addCard(new Card(this.newCardForm.controls['text'].value));
+            }
+        }
+    Then trigger with keypress frequency.
+        addCard(card) {
+            this.onCardAdd.emit(card);
+            //this.newCard.text = '';
+            this.newCardForm.controls['text'].setValue(''); //pure javascript
+        }
+    It will trigger main.component.ts.
+    <app-new-card-input (onCardAdd)="addCard($event)"></app-new-card-input>
+
+5. services. for providing REST API services.
+
+6. Effect:
+    provide firebase connection and get and add services.
